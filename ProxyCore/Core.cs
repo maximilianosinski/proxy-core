@@ -63,7 +63,7 @@ public abstract class Core
         };
         if (exitNode != null)
         {
-            settings.TorSettings.ExitNodes = exitNode;
+            settings.TorSettings.ExitNodes = exitNode.ToLower();
         }
         using var httpClient = new HttpClient();
         var fetcher = new TorSharpToolFetcher(settings, httpClient);
@@ -71,6 +71,6 @@ public abstract class Core
         using var proxy = new TorSharpProxy(settings);
         await proxy.ConfigureAndStartAsync();
 
-        return new TorRelay(proxy, new Uri($"socks5://localhost:{settings.TorSettings.SocksPort}"));
+        return new TorRelay(proxy, "socks5://localhost", settings.TorSettings.SocksPort);
     }
 }
