@@ -10,11 +10,13 @@ public class ResolvedProxy
     private long _totalPingCount;
     private int _attemptedPingAnalyses;
     private Thread? _pingAnalysesThread;
+    public WebProxy WebProxy { get; }
     public GeoLocation Location { get; }
 
-    public ResolvedProxy(Uri host, string city, string country, NetworkCredential? credentials = null)
+    public ResolvedProxy(Uri host, WebProxy webProxy, string city, string country, NetworkCredential? credentials = null)
     {
         Host = host;
+        WebProxy = webProxy;
         Credentials = credentials;
         Location = new GeoLocation(city, country);
     }

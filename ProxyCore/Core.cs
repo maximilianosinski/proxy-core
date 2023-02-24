@@ -1,11 +1,12 @@
 using System.Net;
+using Knapcode.TorSharp;
 using Newtonsoft.Json.Linq;
 
 namespace ProxyCore;
 
-public class Core
+public abstract class Core
 {
-    public static async Task<ResolvedProxy> ResolveProxy(ProxyScheme proxyScheme, string host, int port, string? username = null, string? password = null)
+    public static async Task<ResolvedProxy> ResolveProxyAsync(ProxyScheme proxyScheme, string host, int port, string? username = null, string? password = null)
     {
         var useAuthentication = username != null && password != null;
         NetworkCredential? credentials = null;
@@ -44,9 +45,32 @@ public class Core
 
         if (json["city"] == null || json["country"] == null) throw new MissingFieldException("Resolve failed: City or Country field not found in Geo API response.");
 
-        return new ResolvedProxy(uri, (string)json["city"], (string)json["country"], credentials)
+        return new ResolvedProxy(uri, proxy, (string)json["city"], (string)json["country"], credentials)
         {
             AveragePing = latency
         };
+    }
+
+    public static async Task<TorRelay> GetTorRelayAsync(string? exitNode = null)
+    {
+        var settings = new TorSharpSettings
+        {
+            PrivoxySettings =
+            {
+                Disable = true
+            },
+            WriteToConsole = false
+        };
+        if (exitNode != null)
+        {
+            settings.TorSettings.ExitNodes = exitNode;
+        }
+        using var httpClient = new HttpClient();
+        var fetcher = new TorSharpToolFetcher(settings, httpClient);
+        await fetcher.FetchAsync();
+        using var proxy = new TorSharpProxy(settings);
+        await proxy.ConfigureAndStartAsync();
+
+        return new TorRelay(proxy, new Uri($"socks5://localhost:{settings.TorSettings.SocksPort}"));
     }
 }
