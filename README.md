@@ -1,7 +1,7 @@
 
 # proxy-core
 
-With this library you can check your proxies, query live latency, retrieve Tor relays and use them as proxies and more.
+With this library you can check your proxies, query live latency, get location, retrieve Tor relays and use them as proxies and more.
 
 ## Examples
 
