@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyCore", "ProxyCore\ProxyCore.csproj", "{0C55B36E-61FD-477E-872F-D74D9F9C32BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyCore CLI", "ProxyCore CLI\ProxyCore CLI.csproj", "{3982BC33-A3A1-4C65-8FB2-F0F19D420D6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{0C55B36E-61FD-477E-872F-D74D9F9C32BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C55B36E-61FD-477E-872F-D74D9F9C32BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C55B36E-61FD-477E-872F-D74D9F9C32BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3982BC33-A3A1-4C65-8FB2-F0F19D420D6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3982BC33-A3A1-4C65-8FB2-F0F19D420D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3982BC33-A3A1-4C65-8FB2-F0F19D420D6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3982BC33-A3A1-4C65-8FB2-F0F19D420D6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
